@@ -8,6 +8,8 @@ import axios from 'axios'
 import Search from './components/users/Search';
 import Alert from './components/layout/Alert'
 import About from './components/pages/About';
+import GithubContext from './context/github/githubContext'
+import Githubstate from './context/github/GithubState';
 
 const App = () => {
 
@@ -84,6 +86,7 @@ const [alert,setAlert] = useState(null)
   
    //const { users, user, repos, loading,alert } = this.state
     return (
+      <Githubstate>
       <Router>
 
       <div className="App">
@@ -109,6 +112,7 @@ const [alert,setAlert] = useState(null)
         
       </div>
       </Router>
+      </Githubstate>
     );
   
   
