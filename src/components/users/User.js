@@ -7,10 +7,10 @@ import GithubContext from '../../context/github/githubContext'
 
 
 
-const User = ({ getUserRepos,repos, match }) => {
+const User = ({ match }) => {
 
     const githubContext = useContext(GithubContext)
-    const { user, loading, getUser } = githubContext
+    const { user, loading, getUser, repos, getUserRepos } = githubContext
     useEffect(()=>{
         getUser(match.params.login)
         getUserRepos(match.params.login)
@@ -94,13 +94,7 @@ const User = ({ getUserRepos,repos, match }) => {
    
 }
 
-User.propTypes = {
-    loading: PropTypes.bool.isRequired,
-    user: PropTypes.object.isRequired,
-    getUser: PropTypes.func.isRequired,
-    getUserRepos: PropTypes.func.isRequired,
-    repos: PropTypes.array.isRequired,
-}
+
 
 export default User
 
