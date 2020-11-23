@@ -1,77 +1,31 @@
-import React, { useState, Fragment } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import './App.css';
-import Users from './components/users/Users'
 import User from './components/users/User'
-import Search from './components/users/Search';
 import Alert from './components/layout/Alert'
 import About from './components/pages/About';
-import GithubContext from './context/github/githubContext'
 import Githubstate from './context/github/GithubState';
+import Alertstate from './context/alert/AlertState';
+import Home from './components/pages/Home';
+import NotFound from './components/pages/NotFound';
 
 const App = () => {
 
-
-
-
-const [alert,setAlert] = useState(null)
-
-  
-
-  // async componentDidMount(){
-
-    
-
-  //     this.setState({loading: true})
-
-  //     const res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
-  //     console.log(res.data.items)
-  //     this.setState({users: res.data.items, loading: false})
-  // }
-
-  
- 
-
-  // Get user repos
- 
-
- 
-
-  const setAlerts = (msg, type) => {
-    setAlert(
-      {
-        msg: msg,
-        type: type
-      }
-    )
-    setTimeout( () => setAlert(null),3000)
-  
-  }
-
-  
-   //const { users, user, repos, loading,alert } = this.state
     return (
       <Githubstate>
+        <Alertstate>
       <Router>
 
       <div className="App">
         <Navbar title={'Github Profile Finder'}/>
         <div className="container">
-        <Alert alert={alert}/>
+        <Alert />
         <Switch>
-          <Route exact path='/' render={props => (
-            <Fragment>
-              <Search  setAlerts={setAlerts}/> 
-              <Users /> 
-            </Fragment>
-          )} />
+          <Route exact path='/' component={Home} />
          <Route exact path="/about" component={About}/> 
-         {/* <Route  exact path="/user/:login" render={props => (
-           <User { ...props }  getUserRepos={getUserRepos} repos={repos}  />
-         )}/> */}
          <Route  exact path="/user/:login" component={User} />
-
+         <Route component={NotFound} />
         </Switch>
         
 
@@ -80,6 +34,7 @@ const [alert,setAlert] = useState(null)
         
       </div>
       </Router>
+      </Alertstate>
       </Githubstate>
     );
   
